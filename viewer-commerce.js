@@ -176,3 +176,14 @@
   setInterval(showFeaturedShopSummary,250);
   showFeaturedShopSummary();
 })();
+
+(()=>{
+  function hideFeaturedShopPrice(){
+    const button=document.querySelector('.live-cart-button.featured-shop-button');
+    if(!button)return;
+    const amount=button.querySelector('em');
+    if(amount)amount.remove();
+  }
+  setInterval(hideFeaturedShopPrice,200);
+  hideFeaturedShopPrice();
+})();
