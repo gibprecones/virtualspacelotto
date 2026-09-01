@@ -28,3 +28,32 @@
   setInterval(organizeViewerTopControls,250);
   organizeViewerTopControls();
 })();
+
+(()=>{
+  function organizeYoutubeStyleControls(){
+    const video=document.querySelector('.video');
+    if(!video)return;
+    let top=video.querySelector('.viewer-top-controls');
+    if(!top){top=document.createElement('div');top.className='viewer-top-controls';video.append(top)}
+    let bottom=video.querySelector('.viewer-bottom-controls');
+    if(!bottom){bottom=document.createElement('div');bottom.className='viewer-bottom-controls';video.append(bottom)}
+    const play=video.querySelector('.viewer-play-link');
+    const guide=video.querySelector('.video-guide-button');
+    const sound=video.querySelector('.live-sound-button');
+    if(play&&play.parentElement!==top)top.append(play);
+    if(guide&&guide.parentElement!==top)top.append(guide);
+    if(sound&&sound.parentElement!==bottom)bottom.append(sound);
+  }
+  setInterval(organizeYoutubeStyleControls,120);
+  organizeYoutubeStyleControls();
+})();
+
+(()=>{
+  function markSoundState(){
+    const button=document.querySelector('.live-sound-button');
+    if(!button)return;
+    button.dataset.soundState=/sound on/i.test(button.textContent)?'on':'off';
+  }
+  setInterval(markSoundState,150);
+  markSoundState();
+})();

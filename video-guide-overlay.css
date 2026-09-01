@@ -62,3 +62,63 @@
   .video .viewer-top-controls .live-sound-button{min-height:31px!important;padding:7px 9px!important;font-size:11px!important}
   .video .video-guide-panel{top:52px!important;right:10px!important;left:10px!important}
 }
+
+/* Final buyer video controls: Play Lotto top-right, Sound bottom-left like YouTube. */
+.video .viewer-top-controls{
+  top:16px!important;
+  right:16px!important;
+  left:auto!important;
+  max-width:calc(100% - 140px)!important;
+  justify-content:flex-end!important;
+}
+.video .viewer-top-controls .viewer-play-link{order:1!important}
+.video .viewer-top-controls .video-guide-button{order:2!important}
+.video .viewer-bottom-controls{
+  position:absolute;
+  left:16px;
+  bottom:16px;
+  z-index:18;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  opacity:0;
+  transform:translateY(8px);
+  pointer-events:none;
+  transition:opacity .18s ease,transform .18s ease;
+}
+.video:hover .viewer-bottom-controls,
+.video.controls-visible .viewer-bottom-controls,
+.video:focus-within .viewer-bottom-controls{
+  opacity:1;
+  transform:translateY(0);
+  pointer-events:auto;
+}
+.video .viewer-bottom-controls .live-sound-button{
+  position:static!important;
+  inset:auto!important;
+  width:42px!important;
+  min-width:42px!important;
+  height:42px!important;
+  min-height:42px!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:999px!important;
+  background:#ffffffd9!important;
+  color:#17223a!important;
+  box-shadow:0 8px 22px #0006!important;
+  overflow:hidden!important;
+  font-size:0!important;
+}
+.video .viewer-bottom-controls .live-sound-button::before{
+  content:'🔊';
+  font-size:18px!important;
+  line-height:1!important;
+}
+@media(max-width:760px){
+  .video .viewer-top-controls{top:12px!important;right:12px!important;left:70px!important;max-width:none!important}
+  .video .viewer-bottom-controls{left:12px;bottom:12px}
+  .video .viewer-bottom-controls .live-sound-button{width:38px!important;min-width:38px!important;height:38px!important;min-height:38px!important}
+}
+.video .viewer-bottom-controls .live-sound-button[data-sound-state="off"]::before{content:"🔇"}
+.video .viewer-bottom-controls .live-sound-button[data-sound-state="on"]::before{content:"🔊"}
+
