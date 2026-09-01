@@ -1,1 +1,22 @@
 .add-product{float:right;margin-top:-43px;border:0;border-radius:8px;padding:9px 13px;background:#0755be;color:#fff;font-weight:800;cursor:pointer}.product-modal{position:fixed;z-index:50;inset:0;background:#06142e99;display:grid;place-items:center;padding:16px}.product-form{position:relative;width:min(430px,94vw);background:#fff;border-radius:16px;padding:26px;display:grid;gap:12px}.product-form h2{margin:0}.product-form input{padding:12px;border:1px solid #cfdbea;border-radius:8px}.modal-close{position:absolute;right:13px;top:10px;border:0;background:none;color:#10213d;font-size:25px;cursor:pointer}.image-preview{height:130px;border:1px dashed #b9c9dd;border-radius:10px;display:grid;place-items:center;font-size:36px;overflow:hidden}.image-preview img{width:100%;height:100%;object-fit:cover}.save-product{border:0;border-radius:8px;padding:12px;background:#0755be;color:#fff;font-weight:800;cursor:pointer}.live-product-overlay{position:absolute;z-index:3;left:16px;bottom:70px;display:flex;gap:10px;align-items:center;max-width:270px;padding:10px;background:#fff;border-radius:10px;box-shadow:0 8px 20px #0007;color:#10213d}.live-product-overlay img,.live-product-overlay>span{width:46px;height:46px;object-fit:cover;border-radius:7px;background:#edf3fb;display:grid;place-items:center;font-size:25px}.live-product-overlay b,.live-product-overlay small{display:block}.live-product-overlay small{color:#0755be;font-weight:800;margin-top:3px}
+
+/* Final featured product layout polish: tighter, cleaner cards inside the seller Live Store. */
+.product-panel{padding:16px 18px!important;margin-top:22px!important;margin-bottom:22px!important}
+.product-panel .eyebrow{margin-bottom:6px!important}
+.product-panel h2{margin:0 0 12px!important;font-size:23px!important;line-height:1.15!important}
+.catalog-toolbar{gap:8px!important;margin-bottom:12px!important;align-items:center!important}
+.catalog-toolbar input,.catalog-toolbar select{height:38px!important}
+.product-grid{grid-auto-columns:190px!important;gap:10px!important;padding:0 2px 8px!important}
+.product-card,.product-card:has(.feature-select){grid-template-rows:96px 40px 24px 18px!important;min-height:196px!important;padding:12px!important;gap:5px!important;border-radius:11px!important}
+.product-card .thumb,.product-panel:not(#storePanel) .product-card .thumb:has(img){height:96px!important;padding:6px 8px!important;border-radius:9px!important;font-size:38px!important}
+.product-card .thumb img,.product-panel:not(#storePanel) .product-card .thumb:has(img) img{max-height:86px!important;max-width:100%!important;object-fit:contain!important}
+.product-card h3,.product-card:has(.feature-select) h3{font-size:12px!important;line-height:1.2!important;min-height:32px!important;-webkit-line-clamp:2!important}
+.product-card p,.product-card:has(.feature-select) p{font-size:16px!important;line-height:1!important;margin-top:0!important}
+.product-card .stock-status,.product-card .seller-stock,.product-card .customer-stock,.product-card:has(.feature-select) .stock-status,.product-card:has(.feature-select) .seller-stock,.product-card:has(.feature-select) .customer-stock{font-size:11px!important;line-height:1.05!important}
+.product-card .pin,.product-card:has(.feature-select) .pin{top:10px!important;left:10px!important;width:24px!important;min-width:24px!important;height:24px!important;min-height:24px!important}
+.product-card .pin:after{font-size:12px!important}
+.product-card.pinned-product .pin:after{font-size:13px!important}
+.product-card .feature-select{top:44px!important;left:12px!important;width:14px!important;height:14px!important}
+.product-card .edit-product,.product-card:has(.feature-select) .edit-product{top:10px!important;right:10px!important;height:26px!important;min-height:26px!important;padding:4px 9px!important;font-size:10px!important;border-radius:7px!important}
+.product-card.pinned-product:before{top:38px!important;right:10px!important;font-size:7px!important;padding:3px 5px!important}
+@media(max-width:760px){.product-grid{grid-auto-columns:minmax(170px,68vw)!important}.product-card,.product-card:has(.feature-select){min-height:190px!important}}

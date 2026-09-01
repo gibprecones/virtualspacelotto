@@ -90,3 +90,7 @@ button,.primary,.secondary,.open-picker,.action-button,.card-action{
     flex:1 1 100%!important;
   }
 }
+
+/* Global Henry Sans-style typography lock for the whole project. */
+:root{--vsl-font:"Henry Sans","HenrySans","Aptos","Avenir Next","Nunito Sans","Segoe UI",Arial,sans-serif}
+html,body,button,input,select,textarea,a,table,.modal,.dashboard-card,.product-panel,.product-card{font-family:var(--vsl-font)!important}
