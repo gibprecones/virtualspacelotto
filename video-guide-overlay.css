@@ -122,3 +122,12 @@
 .video .viewer-bottom-controls .live-sound-button[data-sound-state="off"]::before{content:"🔇"}
 .video .viewer-bottom-controls .live-sound-button[data-sound-state="on"]::before{content:"🔊"}
 
+
+/* Top controls stay visible; only the lower sound control auto-hides. */
+.video .viewer-top-controls{
+  opacity:1!important;
+  transform:none!important;
+  pointer-events:auto!important;
+}
+.video .viewer-top-controls .live-sound-button{display:none!important}
+.video .viewer-bottom-controls .live-sound-button{display:inline-flex!important}
