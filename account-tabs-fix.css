@@ -1,0 +1,8 @@
+.favorite-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin-top:14px}
+.favorite-card{display:grid;grid-template-columns:54px 1fr auto;gap:10px;align-items:center;border:1px solid #dce5f0;border-radius:12px;padding:10px;background:#fbfdff}
+.favorite-card img,.favorite-card span{width:54px;height:54px;object-fit:contain;border-radius:9px;background:#eef3f9;display:grid;place-items:center}
+.favorite-card b{display:block;font-size:13px}
+.favorite-card p{margin:4px 0 0;color:#60708a;font-size:12px}
+.favorite-card button{border:1px solid #efc8ca;border-radius:8px;padding:8px 10px;background:#fff1f1;color:#c5252b;font-size:12px;font-weight:800;cursor:pointer}
+.profile-card p{margin:5px 0 0}
+.account-placeholder .info-card+.info-card{margin-top:10px}

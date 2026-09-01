@@ -1,0 +1,1 @@
+(()=>{let lastInventory='',lastOrders='';setInterval(()=>{const inventory=localStorage.getItem('vslInventory')||'',orders=localStorage.getItem('vslOrders')||'';if(inventory!==lastInventory)lastInventory=inventory;if(orders!==lastOrders)lastOrders=orders},1000);document.documentElement.classList.add('dashboard-performance-ready')})();

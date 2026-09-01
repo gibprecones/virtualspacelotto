@@ -1,0 +1,1 @@
+(()=>{function update(){const page=document.querySelector('[data-page="help"] .info-card');if(page)page.textContent='For questions or concerns about products, payments, pickup, delivery, or your order, please contact the seller directly.'}setInterval(update,500);update()})();

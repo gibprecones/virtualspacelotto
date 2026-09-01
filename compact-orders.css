@@ -1,0 +1,37 @@
+.seller-orders{overflow:hidden}
+.seller-orders h2{font-size:18px;line-height:1.2}
+.seller-order-list{display:grid;gap:0;max-height:560px;overflow:auto;border:1px solid #dbe5f1;border-radius:14px;background:#fff}
+.seller-order-list:before{display:none!important}
+.seller-order-table-head{position:sticky;top:0;z-index:2;display:grid;grid-template-columns:minmax(136px,.9fr) minmax(140px,1fr) minmax(180px,1.25fr) minmax(170px,1.05fr) minmax(132px,.82fr) minmax(150px,.9fr);gap:10px;padding:10px 12px;border-bottom:1px solid #dbe5f1;background:#f7faff;color:#5f6f87;font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+.seller-order-table-head span{min-width:0}
+.seller-order-list .order-card{display:grid!important;grid-template-columns:minmax(136px,.9fr) minmax(140px,1fr) minmax(180px,1.25fr) minmax(170px,1.05fr) minmax(132px,.82fr) minmax(150px,.9fr)!important;gap:10px!important;align-items:start!important;margin:0!important;padding:12px!important;border:0!important;border-bottom:1px solid #e1e8f2!important;border-radius:0!important;background:#fff!important;box-shadow:none!important;color:#142747;font-size:12px!important;line-height:1.35}
+.seller-order-list .order-card[hidden]{display:none!important}
+.seller-order-list .order-card:last-child{border-bottom:0!important}
+.seller-order-list .order-card:hover{background:#fbfdff!important}
+.seller-order-list .order-label{display:none!important}
+.seller-order-list .order-head{display:block!important;min-width:0}
+.seller-order-list .buyer-detail{grid-column:2!important;grid-row:1!important}
+.seller-order-list .items-detail{grid-column:3!important;grid-row:1!important}
+.seller-order-list .order-head b{display:block;margin-bottom:5px;color:#082f70;font-size:13px;font-weight:900;overflow-wrap:anywhere}
+.seller-order-list .order-head small{display:block;color:#5f6f87;font-size:12px}
+.seller-order-list .buyer-detail p,.seller-order-list .items-detail p{margin:0 0 5px!important;color:#142747;font-size:12px!important;font-weight:800!important;line-height:1.45}
+.seller-order-list .buyer-detail small{display:block;color:#142747;font-size:12px}
+.seller-order-list .items-detail p{font-weight:700!important}
+.seller-order-list .buyer-contact{grid-column:4!important;grid-row:1!important;margin:0!important;padding:0!important;border-radius:0!important;background:transparent!important;color:#142747!important;font-size:12px!important;line-height:1.5}
+.seller-order-list .buyer-contact b{color:#142747}
+.seller-order-list .order-state{grid-column:5!important;display:flex;flex-direction:column;align-items:flex-start;gap:7px;min-width:0}
+.seller-order-list .order-status,.seller-order-list .paid-badge,.seller-order-list .unpaid-badge{display:inline-flex!important;align-items:center;min-height:24px;margin:0!important;padding:5px 9px!important;border-radius:999px!important;font-size:11px!important;font-weight:900!important;line-height:1.1!important;white-space:normal!important}
+.seller-order-list .order-status{background:#eaf2ff!important;color:#0755be!important}
+.seller-order-list .paid-badge{background:#e6f8ee!important;color:#168142!important}
+.seller-order-list .unpaid-badge{background:#fff2d8!important;color:#8a5b00!important}
+.seller-order-list .order-actions{grid-column:6!important;grid-row:1!important;display:grid!important;gap:8px!important;align-items:start!important;margin:0!important;padding:0!important;border:0!important}
+.seller-order-list .order-actions label{display:none!important}
+.seller-order-list .order-actions select{width:100%!important;min-width:0;padding:9px 28px 9px 10px!important;border:1px solid #c8d6e7!important;border-radius:8px!important;background:#fff;color:#16345e;font-size:12px!important;font-weight:800}
+.seller-order-list .process-payment,.seller-order-list .order-op-button{width:100%;min-height:36px;white-space:normal;padding:9px 10px!important;border-radius:8px!important;font-size:12px!important;line-height:1.15!important}
+.seller-order-list .process-payment{background:#118348!important;color:#fff!important}
+.seller-order-list .order-extra-actions{display:grid!important;gap:7px!important;margin:0!important}
+.seller-order-list .payment-required-note{display:block;color:#8a5b00;font-size:11px;font-weight:800;line-height:1.35}
+.seller-order-list .paid-loop-guard{display:none!important}
+.seller-order-list .order-actions.locked:after{content:"Completed orders are locked";color:#60708a;font-size:11px;font-weight:800}
+@media(max-width:1180px){.seller-order-list{display:grid;gap:12px;border:0;background:transparent}.seller-order-table-head{display:none!important}.seller-order-list .order-card{grid-template-columns:1fr 1fr!important;border:1px solid #dbe5f1!important;border-radius:12px!important}.seller-order-list .buyer-detail,.seller-order-list .items-detail,.seller-order-list .order-state,.seller-order-list .order-actions,.seller-order-list .buyer-contact{grid-column:auto!important;grid-row:auto!important}.seller-order-list .items-detail{grid-column:1 / -1!important}.seller-order-list .order-actions{grid-column:1 / -1!important;grid-template-columns:repeat(2,minmax(160px,1fr))!important}.seller-order-list .order-extra-actions{grid-template-columns:repeat(3,1fr)!important}}
+@media(max-width:720px){.seller-order-list{max-height:none}.seller-order-list .order-card{grid-template-columns:1fr!important;padding:14px!important}.seller-order-list .order-actions,.seller-order-list .order-extra-actions{grid-template-columns:1fr!important}}

@@ -1,0 +1,25 @@
+#overview.stats{display:none!important}
+.seller-chat{min-height:420px}
+.chat-messages{display:grid;align-content:start;gap:8px}
+.chat-empty{color:#60708a;font-size:12px}
+.pinned-chat{margin:10px 0;padding:10px;border:1px solid #bdd3f3;border-radius:10px;background:#eef5ff;font-size:12px}
+.pinned-chat b{color:#0755be}
+.seller-chat-message{display:grid;gap:7px;padding:9px;border:1px solid #e2eaf4;border-radius:10px;background:#fff}
+.seller-chat-message.is-pinned{border-color:#8fb5ec;background:#f5f9ff}
+.seller-chat-message header{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.seller-chat-message b{color:#0755be;font-size:12px}
+.seller-chat-message time{color:#75859b;font-size:10px;white-space:nowrap}
+.seller-chat-message p{margin:0;color:#142747;font-size:12px;line-height:1.35}
+.chat-actions{display:flex;flex-wrap:wrap;gap:6px}
+.chat-actions button,.moderation-table button{border:1px solid #c8d8ec;border-radius:7px;padding:6px 8px;background:#fff;color:#0755be;font-size:11px;font-weight:800;cursor:pointer}
+.chat-actions .danger,.moderation-table .danger{border-color:#efc8ca;background:#fff1f1;color:#c5252b}
+.seller-chat-reply{padding:7px 9px;border-left:3px solid #0755be;background:#f3f7fd;color:#33496a;font-size:11px}
+.inline-chat-form{display:grid;grid-template-columns:1fr auto auto;gap:6px;padding-top:4px}
+.inline-chat-form input{min-width:0;border:1px solid #cfdbea;border-radius:7px;padding:7px 8px;font-size:12px}
+.inline-chat-form input[name="days"]{width:64px}
+.inline-chat-form button{border:1px solid #c8d8ec;border-radius:7px;padding:7px 8px;background:#0755be;color:#fff;font-size:11px;font-weight:800;cursor:pointer}
+.inline-chat-form .cancel-inline{background:#fff;color:#0755be}
+.moderation-table{width:100%;border-collapse:collapse;font-size:12px}
+.moderation-table th,.moderation-table td{padding:9px;border-bottom:1px solid #e5edf6;text-align:left;vertical-align:top}
+.moderation-table th{color:#64758e;font-size:10px;letter-spacing:.08em;text-transform:uppercase}
+.mod-badge{display:inline-flex;align-items:center;padding:4px 8px;border-radius:999px;background:#fff2d8;color:#8a5b00;font-size:10px;font-weight:900}

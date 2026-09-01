@@ -1,0 +1,180 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Seller Dashboard | Virtual Space Lotto</title>
+  <link rel="stylesheet" href="project-theme.css">
+  <link rel="stylesheet" href="customer-dashboard.css">
+</head>
+<body>
+  <aside class="seller-sidebar">
+    <b>✦ VIRTUAL SPACE <span>LOTTO</span></b>
+    <p class="role">APPROVED SELLER</p>
+    <nav>
+      <a class="active" href="#overview">Dashboard</a>
+      <a href="#live">Live Selling</a>
+    </nav>
+    <button onclick="logoutCustomer()">Log out</button>
+  </aside>
+  <main>
+    <header class="dashboard-header">
+      <div>
+        <p class="eyebrow">SELLER DASHBOARD</p>
+        <h1>Welcome, <span id="sellerName"></span></h1>
+        <p>Your approved seller workspace.</p>
+      </div>
+      <span class="approved">✓ APPROVED</span>
+    </header>
+
+    <section id="overview" class="dashboard-shell">
+      <div class="dashboard-column dashboard-primary">
+        <article class="dashboard-card sales-overview-card">
+          <div class="card-heading">
+            <h2>Sales Overview</h2>
+          </div>
+          <div class="sales-grid">
+            <div class="metric-tile">
+              <strong id="todaySalesValue">₱0</strong>
+              <p>Today Sale <span id="todaySalesTrend">0%</span></p>
+            </div>
+            <div class="metric-tile">
+              <strong id="weekTransactionsValue">0</strong>
+              <p>This Week Orders <span id="weekTransactionsTrend">0%</span></p>
+            </div>
+            <div class="metric-tile">
+              <strong id="weekSalesValue">₱0</strong>
+              <p>This Week <span id="weekSalesTrend">0%</span></p>
+            </div>
+            <div class="metric-tile">
+              <strong id="monthSalesValue">₱0</strong>
+              <p>This Month <span id="monthSalesTrend">0%</span></p>
+            </div>
+          </div>
+          <div id="dashboardSalesPie" class="dashboard-sales-pie"></div>
+        </article>
+
+        <article class="dashboard-card inventory-summary-card">
+          <div class="card-heading">
+            <h2>Inventory Summary</h2>
+          </div>
+          <div class="inventory-grid">
+            <div class="inventory-pill low-stock">
+              <strong id="inventoryLowCount">0</strong>
+              <span>Items Low stock</span>
+            </div>
+            <div class="inventory-pill out-stock">
+              <strong id="inventoryOutCount">0</strong>
+              <span>Out of stock</span>
+            </div>
+            <div class="inventory-pill fast-stock">
+              <strong id="inventoryFastCount">0</strong>
+              <span>Fast moving items</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="dashboard-card dashboard-notes-card">
+          <div class="card-heading">
+            <h2>Notifications</h2>
+          </div>
+          <div id="dashboardNotificationList" class="dashboard-notification-list"></div>
+        </article>
+      </div>
+
+      <div class="dashboard-column dashboard-secondary">
+        <article class="dashboard-card live-orders-card">
+          <div class="card-heading">
+            <h2>Live Orders</h2>
+            <span id="dashboardLiveCount" class="mini-status">0 active</span>
+          </div>
+          <div id="dashboardLiveOrders" class="dashboard-live-list"></div>
+        </article>
+
+        <article class="dashboard-card payment-tracker-card">
+          <div class="card-heading">
+            <h2>Payment Tracker</h2>
+          </div>
+          <div class="payment-summary-list">
+            <div class="payment-summary-row">
+              <span class="payment-state paid">Paid</span>
+              <strong id="paymentPaidValue">₱0</strong>
+            </div>
+            <div class="payment-summary-row">
+              <span class="payment-state unpaid">Unpaid</span>
+              <strong id="paymentUnpaidValue">₱0</strong>
+            </div>
+            <div class="payment-summary-row">
+              <span class="payment-state refunded">Refunded</span>
+              <strong id="paymentRefundedValue">₱0</strong>
+            </div>
+          </div>
+          <button id="markCompletedShortcut" class="card-action" type="button">Mark as Complete</button>
+        </article>
+      </div>
+
+      <div class="dashboard-column dashboard-tertiary">
+        <article class="dashboard-card notifications-action-card">
+          <div class="card-heading">
+            <h2>Notifications</h2>
+          </div>
+          <div id="dashboardActionAlerts" class="action-alert-list"></div>
+          <div class="action-button-stack">
+            <button id="processPaymentsAction" class="action-button primary" type="button">Process Payments</button>
+            <button id="addProductAction" class="action-button secondary" type="button">Add Product</button>
+            <button id="cancelTransactionAction" class="action-button danger" type="button">Cancel Transaction</button>
+          </div>
+        </article>
+
+        <article class="dashboard-card top-products-card">
+          <div class="card-heading">
+            <h2>Top Products</h2>
+          </div>
+          <div id="dashboardTopProductGraph" class="dashboard-top-product-graph"></div>
+          <div id="dashboardTopProducts" class="top-product-list"></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="live" class="workspace">
+      <div class="section-title">
+        <div>
+          <p class="eyebrow">LIVE SELLING</p>
+          <h2>Go live with your customers</h2>
+        </div>
+        <div class="live-status-wrap">
+          <div class="camera-mode-toggle" aria-label="Camera layout">
+            <button class="active" data-camera-mode="portrait" type="button">Portrait</button>
+            <button data-camera-mode="landscape" type="button">Landscape</button>
+          </div>
+          <span id="orderToggleStatus" class="order-toggle-status">Online orders open</span>
+          <span id="liveBadge">OFFLINE</span>
+        </div>
+      </div>
+      <div class="live-grid">
+        <div class="camera">
+          <video id="cam" autoplay muted playsinline></video>
+          <div id="videoEmpty">Camera preview</div>
+          <div class="controls">
+            <button onclick="startCam()">Start Camera</button>
+            <button class="end" onclick="stopCam()">End Live</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="pickerWindow" class="picker-window" hidden>
+    <div class="browser">
+      <div class="browser-bar">
+        <div class="dots"><i></i><i></i><i></i></div>
+        <span>🔒 LottoMatik Number Picker</span>
+        <button onclick="closePicker()">×</button>
+      </div>
+      <iframe src="number-picker.html" title="LottoMatik Number Picker"></iframe>
+    </div>
+  </div>
+  <script src="customer-dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+.signup-intro{display:flex;flex-direction:column;justify-content:center}
+.mockup-preview{margin:22px 0 0;background:#fff;border-radius:14px;padding:8px;box-shadow:0 12px 32px #0005}
+.mockup-preview img{display:block;width:100%;max-height:250px;object-fit:cover;object-position:top;border-radius:9px}
+.mockup-preview figcaption{padding:9px 5px 2px;color:#38506e;font-size:12px;font-weight:700;line-height:1.35}
+.panel form h3{margin:0 0 4px;font-size:24px}
+@media(max-width:850px){.mockup-preview img{max-height:300px}}
