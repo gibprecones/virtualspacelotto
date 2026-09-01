@@ -152,3 +152,27 @@
   setInterval(keepFeaturedInsideCart,300);
   keepFeaturedInsideCart();
 })();
+
+(()=>{
+  const read=(key,fallback)=>{try{return JSON.parse(localStorage.getItem(key)||JSON.stringify(fallback))}catch{return fallback}};
+  const money=value=>'₱'+Number(value||0).toFixed(2);
+  function productsForFeatured(){
+    const base=[{id:'p1',name:'Lotto Thermal Paper',price:85,icon:'🧾'},{id:'p2',name:'Seller Cap',price:250,icon:'🧢️'},{id:'p3',name:'Promo Poster Set',price:150,icon:'🖼️'}];
+    const saved=read('vslSellerProducts',[]),edits=read('vslSellerProductEdits',{});
+    return [...base,...saved].map(product=>Object.assign({},product,edits[product.id]||{}));
+  }
+  function featuredOnly(){
+    const products=productsForFeatured(),featured=read('vslFeaturedProducts',[]),pinned=localStorage.getItem('vslPinnedProduct');
+    const ids=featured.length?featured:(pinned?[pinned]:[]);
+    return products.filter(product=>ids.includes(product.id));
+  }
+  function showFeaturedShopSummary(){
+    const button=document.querySelector('.live-cart-button');
+    if(!button)return;
+    const featured=featuredOnly(),total=featured.reduce((sum,item)=>sum+Number(item.price||0),0);
+    button.classList.add('featured-shop-button');
+    button.innerHTML='<span>🛒</span><b>Shop</b><small>'+featured.length+'</small><em>'+money(total)+'</em>';
+  }
+  setInterval(showFeaturedShopSummary,250);
+  showFeaturedShopSummary();
+})();
