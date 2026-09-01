@@ -108,3 +108,39 @@
   setInterval(()=>{cartButton();bindCheckout();renderOrders()},1000);
   cartButton();renderCommerceDrawer(false);bindCheckout();renderOrders();
 })();
+
+(()=>{
+  const read=(key,fallback)=>{try{return JSON.parse(localStorage.getItem(key)||JSON.stringify(fallback))}catch{return fallback}};
+  const money=value=>'₱'+Number(value||0).toFixed(2);
+  function availableProducts(){
+    const base=[{id:'p1',name:'Lotto Thermal Paper',price:85,icon:'🧾'},{id:'p2',name:'Seller Cap',price:250,icon:'🧢️'},{id:'p3',name:'Promo Poster Set',price:150,icon:'🖼️'}];
+    const saved=read('vslSellerProducts',[]),edits=read('vslSellerProductEdits',{});
+    return [...base,...saved].map(product=>Object.assign({},product,edits[product.id]||{}));
+  }
+  function featuredProducts(){
+    const products=availableProducts(),featured=read('vslFeaturedProducts',[]),pinned=localStorage.getItem('vslPinnedProduct');
+    const ids=featured.length?featured:(pinned?[pinned]:[]);
+    return products.filter(product=>ids.includes(product.id));
+  }
+  function addFeaturedOverlay(){
+    const video=document.querySelector('.video');
+    if(!video)return;
+    let tray=video.querySelector('.viewer-featured-products');
+    const items=featuredProducts();
+    if(!items.length){tray?.remove();return}
+    if(!tray){tray=document.createElement('div');tray.className='viewer-featured-products';video.append(tray)}
+    tray.innerHTML=items.slice(0,3).map(product=>'<button type="button" class="viewer-featured-card" data-product="'+product.id+'">'+(product.photo?'<img src="'+product.photo+'" alt="">':'<span>'+product.icon+'</span>')+'<b>'+product.name+'</b><strong>'+money(product.price)+'</strong></button>').join('');
+    tray.querySelectorAll('button').forEach(button=>{
+      button.onclick=()=>{
+        const product=availableProducts().find(item=>item.id===button.dataset.product);
+        if(!product)return;
+        window.cart=window.cart||cart;
+        cart.push(product);
+        localStorage.setItem('vslStoreCart',JSON.stringify(cart));
+        document.querySelector('.live-cart-button')?.click();
+      };
+    });
+  }
+  setInterval(addFeaturedOverlay,800);
+  addFeaturedOverlay();
+})();
