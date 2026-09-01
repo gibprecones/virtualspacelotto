@@ -35,3 +35,21 @@
 .seller-order-list .order-actions.locked:after{content:"Completed orders are locked";color:#60708a;font-size:11px;font-weight:800}
 @media(max-width:1180px){.seller-order-list{display:grid;gap:12px;border:0;background:transparent}.seller-order-table-head{display:none!important}.seller-order-list .order-card{grid-template-columns:1fr 1fr!important;border:1px solid #dbe5f1!important;border-radius:12px!important}.seller-order-list .buyer-detail,.seller-order-list .items-detail,.seller-order-list .order-state,.seller-order-list .order-actions,.seller-order-list .buyer-contact{grid-column:auto!important;grid-row:auto!important}.seller-order-list .items-detail{grid-column:1 / -1!important}.seller-order-list .order-actions{grid-column:1 / -1!important;grid-template-columns:repeat(2,minmax(160px,1fr))!important}.seller-order-list .order-extra-actions{grid-template-columns:repeat(3,1fr)!important}}
 @media(max-width:720px){.seller-order-list{max-height:none}.seller-order-list .order-card{grid-template-columns:1fr!important;padding:14px!important}.seller-order-list .order-actions,.seller-order-list .order-extra-actions{grid-template-columns:1fr!important}}
+
+/* Compact order actions: keep replacement/refund/cancel under the transaction name. */
+.seller-order-table-head{grid-template-columns:minmax(150px,.95fr) minmax(140px,1fr) minmax(190px,1.35fr) minmax(170px,1.05fr) minmax(120px,.75fr)!important}
+.seller-order-table-head span:last-child{display:none!important}
+.seller-order-list .order-card{grid-template-columns:minmax(150px,.95fr) minmax(140px,1fr) minmax(190px,1.35fr) minmax(170px,1.05fr) minmax(120px,.75fr)!important;gap:8px 10px!important;padding:10px 12px!important}
+.seller-order-list .order-head{grid-column:1!important;grid-row:1!important}
+.seller-order-list .order-actions{grid-column:1!important;grid-row:2!important;display:flex!important;flex-wrap:wrap!important;gap:5px!important;margin-top:4px!important;align-items:center!important}
+.seller-order-list .order-actions select{width:100%!important;height:28px!important;min-height:28px!important;padding:4px 22px 4px 7px!important;font-size:10px!important;border-radius:7px!important}
+.seller-order-list .order-extra-actions{display:flex!important;flex-wrap:wrap!important;gap:5px!important;width:100%!important}
+.seller-order-list .process-payment,.seller-order-list .order-op-button{width:auto!important;min-width:0!important;min-height:26px!important;padding:5px 7px!important;border-radius:7px!important;font-size:10px!important;line-height:1.1!important;white-space:nowrap!important}
+.seller-order-list .process-payment{width:100%!important}
+.seller-order-list .payment-required-note{font-size:10px!important;line-height:1.2!important;width:100%!important;margin:0!important}
+.seller-order-list .order-actions.locked:after{width:100%;font-size:10px!important;line-height:1.2!important}
+.seller-order-list .buyer-detail{grid-column:2!important;grid-row:1 / span 2!important}
+.seller-order-list .items-detail{grid-column:3!important;grid-row:1 / span 2!important}
+.seller-order-list .buyer-contact{grid-column:4!important;grid-row:1 / span 2!important}
+.seller-order-list .order-state{grid-column:5!important;grid-row:1 / span 2!important}
+@media(max-width:1180px){.seller-order-list .buyer-detail,.seller-order-list .items-detail,.seller-order-list .buyer-contact,.seller-order-list .order-state,.seller-order-list .order-actions{grid-column:auto!important;grid-row:auto!important}.seller-order-list .order-actions{grid-column:1 / -1!important}.seller-order-list .order-extra-actions{grid-template-columns:none!important}}
