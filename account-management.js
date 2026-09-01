@@ -107,3 +107,39 @@
     logoutBuyer();
   },true);
 })();
+
+(()=>{
+  function resetBuyerUiAfterLogout(){
+    localStorage.removeItem('vslViewer');
+    localStorage.removeItem('vslFollowing');
+    try{viewer=null}catch{}
+    document.querySelectorAll('.customer-drawer,.account-management').forEach(node=>node.remove());
+    const form=document.getElementById('chatForm');if(form)form.hidden=true;
+    const gate=document.getElementById('chatGate');
+    if(gate){
+      gate.hidden=false;
+      gate.removeAttribute('data-join-flow');
+      const hasAccounts=JSON.parse(localStorage.getItem('vslViewerAccounts')||'[]').length>0;
+      gate.innerHTML='<b>'+(hasAccounts?'Login to join the live chat':'Sign up to join the live chat')+'</b><p>'+(hasAccounts?'Use your existing buyer Gmail account to chat and order.':'Create a buyer account first, then you can message the seller.')+'</p><div class="join-chat-actions"><button type="button" class="viewer-login-option">Login</button><button type="button" class="viewer-signup-option">Sign up</button></div>';
+    }
+    document.querySelectorAll('.customer-drawer').forEach(node=>node.remove());
+    if(typeof render==='function')setTimeout(render,0);
+  }
+  function bindReliableLogout(){
+    document.querySelectorAll('.logout-viewer').forEach(button=>{
+      if(button.dataset.reliableLogout)return;
+      const clone=button.cloneNode(true);
+      clone.dataset.reliableLogout='1';
+      clone.type='button';
+      clone.onclick=event=>{event.preventDefault();event.stopImmediatePropagation();resetBuyerUiAfterLogout();return false};
+      button.replaceWith(clone);
+    });
+  }
+  document.addEventListener('pointerdown',event=>{
+    const button=event.target.closest('.logout-viewer');
+    if(!button)return;
+    event.preventDefault();event.stopImmediatePropagation();resetBuyerUiAfterLogout();
+  },true);
+  setInterval(bindReliableLogout,250);
+  bindReliableLogout();
+})();
