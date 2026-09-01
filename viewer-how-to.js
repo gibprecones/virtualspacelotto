@@ -1,1 +1,30 @@
 (()=>{const css=document.createElement('link');css.rel='stylesheet';css.href='viewer-how-to.css';document.head.append(css);const officialUrl='https://lottomatik.com/qrmatik?target=/number-picker';function addGuide(){const video=document.querySelector('.video');if(video&&!video.querySelector('.viewer-play-link')){const link=document.createElement('a');link.className='viewer-play-link';link.href=officialUrl;link.target='_blank';link.rel='noopener';link.textContent='🎰 Play Lotto Here';video.append(link)}if(document.querySelector('.how-to-play'))return;const guide=document.createElement('section');guide.className='how-to-play';guide.innerHTML='<p class="eyebrow">LOTTO GUIDE</p><h2>How to Play Lotto</h2><p class="intro">Follow these steps to prepare your numbers, then complete the transaction at the store.</p><div class="play-steps"><article class="play-step"><span class="step-number">1</span><b>Click Play Lotto Here</b><p>Open the official number picker from the live video.</p></article><article class="play-step"><span class="step-number">2</span><b>Select a game</b><p>Choose the lotto game you want to play.</p></article><article class="play-step"><span class="step-number">3</span><b>Pick numbers</b><p>Select your preferred numbers or use Lucky Pick.</p></article><article class="play-step"><span class="step-number">4</span><b>Tap Add</b><p>Review your selected numbers, then add the entry.</p></article><article class="play-step"><span class="step-number">5</span><b>Generate QR</b><p>Generate and save or show the QR code.</p></article><article class="play-step"><span class="step-number">6</span><b>Go to the store</b><p>Present the QR, pay at the store, and get your physical ticket.</p></article></div><p class="play-notice"><span>🎟️</span> Payment and official ticket issuance are completed at the physical store. Keep your printed ticket.</p>';document.querySelector('main')?.after(guide)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',addGuide);else addGuide()})();
+
+(()=>{
+  function organizeViewerTopControls(){
+    const video=document.querySelector('.video');
+    if(!video)return;
+    let controls=video.querySelector('.viewer-top-controls');
+    if(!controls){controls=document.createElement('div');controls.className='viewer-top-controls';video.append(controls)}
+    ['.viewer-play-link','.video-guide-button','.live-sound-button'].forEach(selector=>{
+      const item=video.querySelector(selector);
+      if(item&&item.parentElement!==controls)controls.append(item);
+    });
+    if(!video.dataset.controlsAutohide){
+      video.dataset.controlsAutohide='1';
+      let timer;
+      const show=()=>{
+        video.classList.add('controls-visible');
+        clearTimeout(timer);
+        timer=setTimeout(()=>video.classList.remove('controls-visible'),2300);
+      };
+      ['mousemove','mouseenter','touchstart','focusin'].forEach(type=>video.addEventListener(type,show,{passive:true}));
+      video.addEventListener('mouseleave',()=>{
+        if(!video.querySelector('.video-guide-panel:not([hidden])'))video.classList.remove('controls-visible');
+      });
+      show();
+    }
+  }
+  setInterval(organizeViewerTopControls,250);
+  organizeViewerTopControls();
+})();
