@@ -81,7 +81,7 @@
     shell.innerHTML='<aside class="account-sidebar"><h2>Account Management</h2><nav class="account-nav"><button data-view="profile">👤 My Profile</button><button data-view="addresses">⌖ Saved Addresses</button><button data-view="payments">▣ Payment Methods</button><button data-view="orders" class="active">▤ My Orders</button><button data-view="favorites">♡ Favorites</button><button data-view="help">? Help Center</button><button class="logout-viewer">↪ Log out</button></nav></aside><div class="account-content"></div>';
     orders.before(shell);shell.querySelector('.account-content').append(orders);
     shell.querySelectorAll('[data-view]').forEach(button=>button.onclick=()=>{shell.querySelectorAll('[data-view]').forEach(item=>item.classList.remove('active'));button.classList.add('active');panel(button.dataset.view)});
-    shell.querySelector('.logout-viewer').onclick=()=>{localStorage.removeItem('vslViewer');location.reload()};
+    shell.querySelector('.logout-viewer').onclick=event=>{event.preventDefault();localStorage.removeItem('vslViewer');localStorage.removeItem('vslFollowing');try{viewer=null}catch{}document.querySelectorAll('.customer-drawer,.account-management').forEach(node=>node.remove());location.reload()};
     addFilters();
   }
   setInterval(()=>{prepareSignup();buildAccount()},700);
@@ -142,4 +142,29 @@
   },true);
   setInterval(bindReliableLogout,250);
   bindReliableLogout();
+})();
+
+
+(()=>{
+  function hardBuyerLogout(){
+    localStorage.removeItem('vslViewer');
+    localStorage.removeItem('vslFollowing');
+    try{viewer=null}catch{}
+    document.querySelectorAll('.customer-drawer,.account-management').forEach(node=>node.remove());
+    location.reload();
+  }
+  function armLogoutButtons(){
+    document.querySelectorAll('.logout-viewer').forEach(button=>{
+      button.type='button';
+      button.onclick=event=>{event.preventDefault();event.stopImmediatePropagation();hardBuyerLogout();return false};
+    });
+  }
+  ['click','mousedown','touchstart'].forEach(type=>document.addEventListener(type,event=>{
+    if(!event.target.closest('.logout-viewer'))return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    hardBuyerLogout();
+  },true));
+  setInterval(armLogoutButtons,150);
+  armLogoutButtons();
 })();
