@@ -144,3 +144,11 @@
   setInterval(addFeaturedOverlay,800);
   addFeaturedOverlay();
 })();
+
+(()=>{
+  function keepFeaturedInsideCart(){
+    document.querySelector('.viewer-featured-products')?.remove();
+  }
+  setInterval(keepFeaturedInsideCart,300);
+  keepFeaturedInsideCart();
+})();

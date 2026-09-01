@@ -40,3 +40,8 @@ body:has(.commerce-drawer) #storePanel,body:has(.commerce-drawer) #storeCart{dis
 .video .viewer-featured-card strong{color:#0755be;font-size:11px;line-height:1;font-weight:900}
 .video .live-cart-button{z-index:12}
 @media(max-width:760px){.video .viewer-featured-products{right:120px;left:12px;bottom:12px;padding-left:128px}.video .viewer-featured-card{min-width:158px;grid-template-columns:34px minmax(0,1fr);padding:7px 8px}.video .viewer-featured-card img,.video .viewer-featured-card span{width:34px;height:34px}}
+
+/* Keep buyer featured products inside the Shop drawer, not as a separate video strip. */
+.video .viewer-featured-products{display:none!important}
+.video .live-connection-note{left:150px!important;top:17px!important;max-width:220px!important;white-space:nowrap!important}
+@media(max-width:760px){.video .live-connection-note{left:112px!important;top:16px!important;font-size:10px!important}}
