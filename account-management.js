@@ -87,3 +87,23 @@
   setInterval(()=>{prepareSignup();buildAccount()},700);
   prepareSignup();buildAccount();
 })();
+
+(()=>{
+  function logoutBuyer(){
+    localStorage.removeItem('vslViewer');
+    localStorage.removeItem('vslFollowing');
+    try{viewer=null}catch{}
+    document.querySelectorAll('.customer-drawer,.account-management').forEach(node=>node.remove());
+    const gate=document.getElementById('chatGate'),form=document.getElementById('chatForm');
+    if(gate){gate.hidden=false;gate.removeAttribute('data-join-flow')}
+    if(form)form.hidden=true;
+    if(typeof render==='function')render();
+  }
+  document.addEventListener('click',event=>{
+    const button=event.target.closest('.logout-viewer');
+    if(!button)return;
+    event.preventDefault();
+    event.stopPropagation();
+    logoutBuyer();
+  },true);
+})();

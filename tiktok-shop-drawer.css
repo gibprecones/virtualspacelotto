@@ -45,3 +45,21 @@ body:has(.commerce-drawer) #storePanel,body:has(.commerce-drawer) #storeCart{dis
 .video .viewer-featured-products{display:none!important}
 .video .live-connection-note{left:150px!important;top:17px!important;max-width:220px!important;white-space:nowrap!important}
 @media(max-width:760px){.video .live-connection-note{left:112px!important;top:16px!important;font-size:10px!important}}
+
+/* Final stream Shop button lock: featured count only, no price, no resizing. */
+.video .live-cart-button,
+.video .live-cart-button.featured-shop-button{
+  width:116px!important;
+  min-width:116px!important;
+  height:54px!important;
+  min-height:54px!important;
+  grid-template-columns:auto 1fr auto!important;
+  grid-template-rows:1fr!important;
+  padding:9px 12px!important;
+  transform:none!important;
+  transition:none!important;
+}
+.video .live-cart-button em,
+.video .live-cart-button.featured-shop-button em{display:none!important}
+.video .live-cart-button b{align-self:center!important;line-height:1!important}
+.video .live-cart-button small{align-self:center!important;justify-self:end!important;margin:0!important}

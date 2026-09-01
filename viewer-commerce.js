@@ -187,3 +187,19 @@
   setInterval(hideFeaturedShopPrice,200);
   hideFeaturedShopPrice();
 })();
+
+(()=>{
+  const read=(key,fallback)=>{try{return JSON.parse(localStorage.getItem(key)||JSON.stringify(fallback))}catch{return fallback}};
+  function featuredCount(){
+    const featured=read('vslFeaturedProducts',[]),pinned=localStorage.getItem('vslPinnedProduct');
+    return featured.length||(pinned?1:0);
+  }
+  function enforceFeaturedShopButton(){
+    const button=document.querySelector('.video .live-cart-button');
+    if(!button)return;
+    button.classList.add('featured-shop-button');
+    button.innerHTML='<span>🛒</span><b>Shop</b><small>'+featuredCount()+'</small>';
+  }
+  setInterval(enforceFeaturedShopButton,120);
+  enforceFeaturedShopButton();
+})();
