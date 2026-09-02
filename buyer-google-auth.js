@@ -27,7 +27,7 @@
         if(!profile?.email){showError('Unable to read Gmail profile. Please try again.');return}
         if(!/@gmail\.com$/i.test(profile.email)){showError('Please use a Gmail account.');return}
         const email=normalize(profile.email);
-        if(read('vslViewerAccounts',[]).some(account=>normalize(account.email)===email)){showError('This Gmail already has an account. Please login instead.');return}
+        const existing=read('vslViewerAccounts',[]).find(account=>normalize(account.email)===email);if(existing){loginExisting(existing);return}
         lastProfile={email,name:profile.name||profile.given_name||email.split('@')[0],picture:profile.picture||''};
         applyProfile(lastProfile);
       }
@@ -35,6 +35,7 @@
     googleReady=true;
   }
   function showError(message){const error=document.getElementById('gmailFlowError')||document.getElementById('viewerSignupError');if(error)error.textContent=message}
+  function loginExisting(user){try{viewer=user}catch{}localStorage.setItem('vslViewer',JSON.stringify(user));const followers=read('vslFollowers',[]),email=normalize(user.email);if(email&&!followers.includes(email))followers.push(email);localStorage.setItem('vslFollowers',JSON.stringify(followers));localStorage.setItem('vslFollowing','yes');document.getElementById('signup')?.setAttribute('hidden','');document.querySelectorAll('.customer-drawer,.account-management').forEach(node=>node.remove());const gate=document.getElementById('chatGate');if(gate)gate.hidden=true;const form=document.getElementById('chatForm');if(form)form.hidden=false;if(typeof render==='function')render()}
   function applyProfile(profile){
     const form=document.querySelector('#signup .signup'),step=document.getElementById('profileStep');if(!form||!step)return;
     form.dataset.email=profile.email;
@@ -57,7 +58,7 @@
       initGoogle();
       if(!window.google?.accounts?.id){showError('Google login is still loading. Please wait a second and try again.');loadGoogle();return}
       google.accounts.id.prompt(notification=>{
-        if(notification.isNotDisplayed?.()||notification.isSkippedMoment?.())showError('Google sign-in popup was blocked or cancelled. Allow popups/sign-in and try again.');
+        if(notification.isNotDisplayed?.())showError('Google sign-in could not open. Please allow Google sign-in popups and try again.');
       });
     };
   }
@@ -66,3 +67,5 @@
   setInterval(attachButton,300);
   attachButton();
 })();
+
+

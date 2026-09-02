@@ -334,7 +334,7 @@ applyCameraMode();
 let stream;
 const cam=document.getElementById('cam'),empty=document.getElementById('videoEmpty'),badge=document.getElementById('liveBadge'),pickerWindow=document.getElementById('pickerWindow');
 pickerWindow.style.display='none';
-async function startCam(){try{if(!navigator.mediaDevices?.getUserMedia)throw new Error('Camera API unavailable');if(stream)stream.getTracks().forEach(track=>track.stop());try{stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user'},audio:true})}catch(firstError){stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user'},audio:false})}cam.muted=true;cam.autoplay=true;cam.playsInline=true;cam.srcObject=stream;await cam.play().catch(()=>{});empty.style.display='none';badge.textContent='🔴 LIVE';badge.classList.add('live')}catch(error){empty.style.display='grid';badge.textContent='OFFLINE';badge.classList.remove('live');alert('Camera not detected. Please allow camera permission, close other apps using the camera, then try Start Camera again.')}}
+async function startCam(){try{if(!navigator.mediaDevices?.getUserMedia)throw new Error('Camera API unavailable');if(stream)stream.getTracks().forEach(track=>track.stop());const timeout=new Promise((_,reject)=>setTimeout(()=>reject(new Error('Camera request timed out')),12000));try{stream=await Promise.race([navigator.mediaDevices.getUserMedia({video:true,audio:true}),timeout])}catch(firstError){stream=await Promise.race([navigator.mediaDevices.getUserMedia({video:true,audio:false}),timeout])}cam.muted=true;cam.autoplay=true;cam.playsInline=true;cam.srcObject=stream;await cam.play().catch(()=>{});empty.style.display='none';badge.textContent='🔴 LIVE';badge.classList.add('live')}catch(error){empty.style.display='grid';badge.textContent='OFFLINE';badge.classList.remove('live');alert('Camera not detected. Please allow camera permission, close other apps using the camera, then try Start Camera again.')}}
 function stopCam(){if(stream)stream.getTracks().forEach(track=>track.stop());cam.srcObject=null;empty.style.display='grid';badge.textContent='OFFLINE';badge.classList.remove('live')}
 function openPicker(){pickerWindow.hidden=false;pickerWindow.style.display='grid'}
 function closePicker(){pickerWindow.hidden=true;pickerWindow.style.display='none'}
@@ -346,4 +346,5 @@ renderDashboardSummary();
 renderSellerBuyerPreview();
 setInterval(renderDashboardSummary,1000);
 setInterval(renderSellerBuyerPreview,700);
+
 
