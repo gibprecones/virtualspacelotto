@@ -10,12 +10,13 @@
   function saveViewer(next){viewer=next;localStorage.setItem('vslViewer',JSON.stringify(next));const accounts=read('vslViewerAccounts',[]),index=accounts.findIndex(account=>normalize(account.email)===normalize(next.email));if(index>=0){accounts[index]=next;write('vslViewerAccounts',accounts)}}
 
   function prepareSignup(){
-    const form=document.querySelector('#signup .signup');if(!form||form.querySelector('.gmail-signup-note'))return;
+    const form=document.querySelector('#signup .signup');if(!form||form.dataset.finalGmailGps==='1')return;
+    const emailField=document.getElementById('viewerEmail'),lastButton=form.querySelector('button:last-child');
+    if(!emailField||!lastButton)return;
     form.querySelector('h2').textContent='Create customer account';
-    const note=document.createElement('div');note.className='gmail-signup-note';note.innerHTML='<span>G</span> Sign up using Gmail';form.querySelector('h2').after(note);
-    document.getElementById('viewerEmail').placeholder='yourname@gmail.com';
-    document.getElementById('viewerEmail').setAttribute('pattern','.+@gmail\\.com');
-    const error=document.createElement('p');error.id='viewerSignupError';error.className='signup-error';form.querySelector('button:last-child').before(error);
+    emailField.placeholder='yourname@gmail.com';
+    emailField.setAttribute('pattern','.+@gmail\\.com');
+    if(!document.getElementById('viewerSignupError')){const error=document.createElement('p');error.id='viewerSignupError';error.className='signup-error';lastButton.before(error);}
   }
   window.registerViewer=event=>{
     event.preventDefault();
@@ -168,3 +169,5 @@
   setInterval(armLogoutButtons,150);
   armLogoutButtons();
 })();
+
+
