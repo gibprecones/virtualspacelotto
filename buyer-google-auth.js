@@ -47,25 +47,28 @@
     const gmail=document.getElementById('gmailStep');if(gmail)gmail.hidden=true;
     step.hidden=false;
   }
+  function startGoogleAuth(){
+    showError('');
+    initGoogle();
+    if(!window.google?.accounts?.id){showError('Google login is still loading. Please wait a second and try again.');loadGoogle();return}
+    google.accounts.id.prompt(notification=>{
+      if(notification.isNotDisplayed?.())showError('Google sign-in could not open. Please allow Google sign-in popups and try again.');
+    });
+  }
   function attachButton(){
     initGoogle();
     const button=document.getElementById('continueGmail');
-    if(!button||button.dataset.realGoogleAuth)return;
+    if(!button)return;
     button.dataset.realGoogleAuth='1';
     button.innerHTML='<span class="gmail-logo">G</span> Continue with Gmail';
-    button.onclick=()=>{
-      showError('');
-      initGoogle();
-      if(!window.google?.accounts?.id){showError('Google login is still loading. Please wait a second and try again.');loadGoogle();return}
-      google.accounts.id.prompt(notification=>{
-        if(notification.isNotDisplayed?.())showError('Google sign-in could not open. Please allow Google sign-in popups and try again.');
-      });
-    };
+    button.onclick=startGoogleAuth;
   }
   window.vslApplyGoogleBuyerProfile=applyProfile;
+  window.vslStartGoogleBuyerAuth=startGoogleAuth;
   loadGoogle();
   setInterval(attachButton,300);
   attachButton();
 })();
+
 
 
