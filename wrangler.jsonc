@@ -1,0 +1,13 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "virtualspacelotto",
+  "compatibility_date": "2026-09-02",
+  "pages_build_output_dir": ".",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "kaya-store-340531a0930748758021",
+      "database_id": "34417909-f2eb-49d6-aac5-2b738d29a7dc"
+    }
+  ]
+}
