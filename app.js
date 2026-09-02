@@ -9,3 +9,50 @@ permitSelect.addEventListener('change',()=>{supportingDocLabel.childNodes[0].nod
 document.getElementById('appForm').addEventListener('submit',event=>{event.preventDefault();const application={id:'VSL-2026-'+Math.floor(100000+Math.random()*900000),name:document.getElementById('appName').value.trim(),email:document.getElementById('appEmail').value.trim().toLowerCase(),mobile:document.getElementById('appMobile').value.trim(),address:document.getElementById('appAddress').value.trim(),hasPermit:permitSelect.value,status:'UNDER REVIEW',followUp:false,password:null},applications=getApplications(),viewerAccounts=JSON.parse(localStorage.getItem('vslViewerAccounts')||'[]'),result=document.getElementById('result');if(applications.some(item=>item.email.trim().toLowerCase()===application.email)||viewerAccounts.some(item=>item.email.trim().toLowerCase()===application.email)){result.innerHTML='<span style="color:#c5252b;font-weight:700">This email has already been registered. Please use another email.</span>';return}applications.push(application);saveApplications(applications);localStorage.setItem('vslRegisteredEmails',JSON.stringify([...new Set([...JSON.parse(localStorage.getItem('vslRegisteredEmails')||'[]'),application.email])]));localStorage.setItem('vslApplication',application.id);result.innerHTML='<b>Application submitted!</b><br>Your tracking ID: '+application.id+'<br>Status: UNDER REVIEW<br><button class="primary" type="button" onclick="requestFollowUp()">Contact Support to Follow Up</button>';event.target.reset();supportingDocLabel.childNodes[0].nodeValue='NBI / supporting document '});
 function loginApplicant(){const email=document.getElementById('loginEmail').value.trim().toLowerCase(),password=document.getElementById('loginPassword').value,application=getApplications().find(item=>item.email===email),message=document.getElementById('loginMessage');if(!application){message.textContent='No application was found for this email.';return}if(application.status!=='APPROVED'){hideLogin();showModal('support');return}if(!application.password){localStorage.setItem('vslPasswordSetupEmail',application.email);hideLogin();showModal('passwordSetup');return}if(application.password!==password){message.textContent='Incorrect password. Please try again.';return}localStorage.setItem('vslCustomerSession',application.email);location.href='customer-dashboard.html'}
 function savePassword(){const password=document.getElementById('newPassword').value,confirmPassword=document.getElementById('confirmPassword').value,message=document.getElementById('passwordMessage'),email=localStorage.getItem('vslPasswordSetupEmail');if(password.length<6){message.textContent='Password must have at least 6 characters.';return}if(password!==confirmPassword){message.textContent='Passwords do not match.';return}const applications=getApplications(),application=applications.find(item=>item.email===email);if(!application){message.textContent='Application not found.';return}application.password=password;saveApplications(applications);localStorage.removeItem('vslPasswordSetupEmail');localStorage.setItem('vslCustomerSession',application.email);location.href='customer-dashboard.html'}
+
+(()=>{
+  const read=(key,fallback)=>{try{return JSON.parse(localStorage.getItem(key)||JSON.stringify(fallback))}catch{return fallback}};
+  const write=(key,value)=>localStorage.setItem(key,JSON.stringify(value));
+  const normalize=value=>String(value||'').trim().toLowerCase();
+  function sellerEmails(){
+    const applications=read('vslApplications',[]).map(item=>normalize(item.email)).filter(Boolean);
+    const registry=read('vslRegisteredEmails',[]).map(normalize).filter(Boolean);
+    const buyerAccounts=read('vslViewerAccounts',[]).map(item=>normalize(item.email)).filter(Boolean);
+    const merged=[...new Set([...applications,...registry,...buyerAccounts])];
+    write('vslRegisteredEmails',merged);
+    return merged;
+  }
+  function emailExists(email){return sellerEmails().includes(normalize(email))}
+  function showDuplicateSellerEmail(email){
+    const result=document.getElementById('result'),field=document.getElementById('appEmail');
+    if(!result)return;
+    result.innerHTML='<div class="seller-email-guard"><b>This email is already registered.</b><p>For security, one email can only have one Virtual Space Lotto login. Please login instead, or use a different email.</p><div><button type="button" class="primary seller-login-existing">Login with this email</button><button type="button" class="secondary seller-use-different-email">Use different email</button></div></div>';
+    result.querySelector('.seller-login-existing')?.addEventListener('click',()=>{
+      const loginEmail=document.getElementById('loginEmail'),loginPassword=document.getElementById('loginPassword'),message=document.getElementById('loginMessage');
+      if(loginEmail)loginEmail.value=normalize(email);
+      if(loginPassword)loginPassword.focus();
+      if(message)message.textContent='Enter your password to continue with this seller account.';
+      if(typeof showLogin==='function')showLogin();
+    });
+    result.querySelector('.seller-use-different-email')?.addEventListener('click',()=>{
+      if(field){field.value='';field.focus()}
+      result.innerHTML='';
+    });
+    result.scrollIntoView({behavior:'smooth',block:'center'});
+  }
+  document.addEventListener('submit',event=>{
+    const form=event.target;
+    if(!form.matches('#appForm'))return;
+    const email=normalize(document.getElementById('appEmail')?.value);
+    if(email&&emailExists(email)){
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      showDuplicateSellerEmail(email);
+    }
+  },true);
+  document.addEventListener('blur',event=>{
+    if(!event.target.matches('#appEmail'))return;
+    const email=normalize(event.target.value);
+    if(email&&emailExists(email))showDuplicateSellerEmail(email);
+  },true);
+})();

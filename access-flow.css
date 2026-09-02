@@ -3,3 +3,24 @@
 #applicationList article{border:1px solid #d9e1ec;border-radius:10px;padding:16px}
 #applicationList h3,#applicationList p{margin:0 0 8px}
 #result .primary{margin-top:10px}
+
+.seller-email-guard{
+  margin-top:12px;
+  border:1px solid rgba(197,37,43,.2);
+  border-radius:14px;
+  background:#fff5f5;
+  color:#10213d;
+  padding:14px;
+}
+.seller-email-guard b{color:#c5252b}
+.seller-email-guard p{margin:6px 0 12px;color:#49607d;font-size:13px;line-height:1.45}
+.seller-email-guard div{display:flex;flex-wrap:wrap;gap:8px}
+.seller-email-guard .secondary{
+  border:1px solid #cbd8ea;
+  border-radius:10px;
+  background:#fff;
+  color:#0755be;
+  font-weight:900;
+  padding:10px 13px;
+  cursor:pointer;
+}
