@@ -6,7 +6,7 @@
     if(!video)return;
     let controls=video.querySelector('.viewer-top-controls');
     if(!controls){controls=document.createElement('div');controls.className='viewer-top-controls';video.append(controls)}
-    ['.viewer-play-link','.video-guide-button','.live-sound-button'].forEach(selector=>{
+    ['.viewer-play-link','.video-guide-button'].forEach(selector=>{
       const item=video.querySelector(selector);
       if(item&&item.parentElement!==controls)controls.append(item);
     });
@@ -57,3 +57,4 @@
   setInterval(markSoundState,150);
   markSoundState();
 })();
+

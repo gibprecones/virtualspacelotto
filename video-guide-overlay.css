@@ -131,3 +131,8 @@
 }
 .video .viewer-top-controls .live-sound-button{display:none!important}
 .video .viewer-bottom-controls .live-sound-button{display:inline-flex!important}
+
+/* Hard lock: never show duplicate Sound in the upper-right group; keep only lower-left. */
+.video > .live-sound-button,
+.video .viewer-top-controls .live-sound-button{display:none!important;visibility:hidden!important}
+.video .viewer-bottom-controls .live-sound-button{display:inline-flex!important;visibility:visible!important}

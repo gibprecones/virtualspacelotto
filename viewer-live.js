@@ -17,3 +17,6 @@ function addToCart(id){const product=products.find(item=>item.id===id);cart.push
   setInterval(syncViewerSession,250);
   syncViewerSession();
 })();
+
+const buyerLiveFinalFixStyles=document.createElement('link');buyerLiveFinalFixStyles.rel='stylesheet';buyerLiveFinalFixStyles.href='buyer-live-final-fixes.css';document.head.append(buyerLiveFinalFixStyles);const buyerLiveFinalFixScript=document.createElement('script');buyerLiveFinalFixScript.src='buyer-live-final-fixes.js';document.head.append(buyerLiveFinalFixScript);
+
