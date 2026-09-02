@@ -23,3 +23,5 @@ const buyerLiveFinalFixStyles=document.createElement('link');buyerLiveFinalFixSt
 
 const buyerGoogleAuthScript=document.createElement('script');buyerGoogleAuthScript.src='buyer-google-auth.js';document.head.append(buyerGoogleAuthScript);
 
+
+const buyerCheckoutFlowFixStyles=document.createElement('link');buyerCheckoutFlowFixStyles.rel='stylesheet';buyerCheckoutFlowFixStyles.href='buyer-checkout-flow-fix.css';document.head.append(buyerCheckoutFlowFixStyles);const buyerCheckoutFlowFixScript=document.createElement('script');buyerCheckoutFlowFixScript.src='buyer-checkout-flow-fix.js';document.head.append(buyerCheckoutFlowFixScript);
