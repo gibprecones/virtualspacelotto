@@ -60,3 +60,25 @@
   setInterval(()=>{organizeSettingsTabs();renderInventorySummary();fixFeatureProductSearch()},500);
   organizeSettingsTabs();renderInventorySummary();fixFeatureProductSearch();
 })();
+
+(()=>{
+  function activeTab(){return document.querySelector('.settings-security-tabs button.active')?.dataset.tab||'checkout'}
+  function shellContent(){return document.querySelector('.settings-security-tab-content')}
+  function forceSettingsIsolation(){
+    const content=shellContent();if(!content)return;
+    const tab=activeTab();
+    const panels=[['checkout','.commerce-settings'],['login','.seller-access-login'],['staff','.security-staff-panel'],['banned','#moderation']];
+    panels.forEach(([name,selector])=>{
+      document.querySelectorAll(selector).forEach(panel=>{
+        panel.dataset.settingsTab=name;
+        if(panel.parentElement!==content)content.append(panel);
+        panel.hidden=name!==tab;
+        panel.classList.toggle('active-settings-tab-panel',name===tab);
+      });
+    });
+    document.querySelectorAll('#activity-history #moderation,.seller-activity #moderation,.commerce-settings #moderation,.seller-access-login #moderation,.security-staff-panel #moderation').forEach(panel=>content.append(panel));
+  }
+  document.addEventListener('click',event=>{if(event.target.closest('.settings-security-tabs button'))setTimeout(forceSettingsIsolation,0)},true);
+  setInterval(forceSettingsIsolation,150);
+  forceSettingsIsolation();
+})();
