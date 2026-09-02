@@ -27,3 +27,5 @@ const buyerGoogleAuthScript=document.createElement('script');buyerGoogleAuthScri
 const buyerCheckoutFlowFixStyles=document.createElement('link');buyerCheckoutFlowFixStyles.rel='stylesheet';buyerCheckoutFlowFixStyles.href='buyer-checkout-flow-fix.css';document.head.append(buyerCheckoutFlowFixStyles);const buyerCheckoutFlowFixScript=document.createElement('script');buyerCheckoutFlowFixScript.src='buyer-checkout-flow-fix.js';document.head.append(buyerCheckoutFlowFixScript);
 
 const buyerOrderScheduleScript=document.createElement('script');buyerOrderScheduleScript.src='buyer-order-schedule.js';document.head.append(buyerOrderScheduleScript);
+
+const buyerAccountCleanupScript=document.createElement('script');buyerAccountCleanupScript.src='buyer-account-cleanup.js';document.head.append(buyerAccountCleanupScript);
