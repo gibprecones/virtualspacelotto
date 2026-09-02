@@ -1,1 +1,18 @@
 .buyer-live-brandbar{align-items:center;background:rgba(255,255,255,.94);border:1px solid rgba(255,255,255,.22);border-radius:16px;box-shadow:0 14px 34px rgba(0,0,0,.16);color:#10203d;display:flex;gap:14px;justify-content:space-between;left:18px;max-width:calc(100% - 36px);padding:10px 12px;position:absolute;right:18px;top:64px;z-index:12}.buyer-live-company{display:block;font-size:14px;font-weight:950;line-height:1.1}.buyer-live-store-id{color:#0f5fcb;display:block;font-size:11px;font-weight:900;margin-top:3px}.buyer-live-metrics{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}.buyer-live-metrics span{background:#eef5ff;border-radius:999px;color:#0755be;font-size:12px;font-weight:900;padding:7px 9px;white-space:nowrap}@media(max-width:760px){.buyer-live-brandbar{align-items:flex-start;flex-direction:column;top:56px}}
+
+/* Buyer live final lock: clean top-left brand, stable icons, and separated chat buttons. */
+.buyer-live-brandbar{
+  align-items:center!important;
+  bottom:auto!important;
+  display:flex!important;
+  gap:10px!important;
+  justify-content:flex-start!important;
+  left:18px!important;
+  max-width:360px!important;
+  padding:9px 11px!important;
+  right:auto!important;
+  top:58px!important;
+  width:auto!important;
+  z-index:13!important;
+}
+.buyer-live-metrics{gap:6px!important;margin-left:auto!important}.buyer-live-metrics span{font-size:11px!important;padding:6px 8px!important}.video .viewer-reactions{right:16px!important;top:50%!important;bottom:auto!important;transform:translateY(-50%)!important;z-index:16!important}.video .viewer-reactions button{position:static!important;margin:0!important}.video .viewer-top-controls{top:18px!important;right:18px!important;left:auto!important;display:flex!important;gap:8px!important;opacity:1!important;transform:none!important;pointer-events:auto!important;z-index:17!important}.video .viewer-play-link{left:auto!important;right:auto!important;bottom:auto!important;top:auto!important;position:static!important}.video .video-guide-button{position:static!important}.video .viewer-bottom-controls{left:18px!important;bottom:18px!important;z-index:17!important}.video .live-cart-button{right:18px!important;bottom:18px!important;top:auto!important;left:auto!important;position:absolute!important;z-index:16!important}.chat-title{align-items:flex-start!important;display:grid!important;grid-template-columns:minmax(0,1fr) auto!important}.chat-title #followers{justify-self:end!important;white-space:nowrap!important}.customer-top-actions{align-items:center!important;display:flex!important;flex-wrap:nowrap!important;gap:10px!important;grid-column:2!important;justify-content:flex-end!important;margin-left:0!important}.customer-top-actions button{min-width:96px!important;text-align:center!important;white-space:nowrap!important}.buyer-live-ready .loading,.buyer-live-ready .page-loading,.buyer-live-ready #loading{display:none!important}@media(max-width:760px){.buyer-live-brandbar{left:12px!important;max-width:calc(100% - 24px)!important;top:58px!important}.video .viewer-top-controls{right:12px!important;left:12px!important;justify-content:flex-end!important}.chat-title{grid-template-columns:1fr!important}.customer-top-actions{grid-column:1!important;justify-content:flex-start!important}}
