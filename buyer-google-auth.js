@@ -60,6 +60,14 @@
     const button=document.getElementById('continueGmail');
     if(!button)return;
     button.dataset.realGoogleAuth='1';
+    if(window.google?.accounts?.id){
+      if(button.dataset.googleRendered==='1')return;
+      button.dataset.googleRendered='1';
+      button.innerHTML='';
+      button.onclick=null;
+      google.accounts.id.renderButton(button,{theme:'outline',size:'large',shape:'rectangular',text:'continue_with',width:Math.max(260,Math.round(button.getBoundingClientRect().width||320))});
+      return;
+    }
     button.innerHTML='<span class="gmail-logo">G</span> Continue with Gmail';
     button.onclick=startGoogleAuth;
   }
@@ -69,6 +77,7 @@
   setInterval(attachButton,300);
   attachButton();
 })();
+
 
 
 
