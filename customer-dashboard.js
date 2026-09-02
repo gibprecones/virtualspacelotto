@@ -354,3 +354,5 @@ setInterval(renderSellerBuyerPreview,700);
 const sellerOrderScheduleScript=document.createElement('script');sellerOrderScheduleScript.src='seller-order-schedule.js';document.head.append(sellerOrderScheduleScript);const sellerOnlineOrderFlowScript=document.createElement('script');sellerOnlineOrderFlowScript.src='seller-online-order-flow.js';document.head.append(sellerOnlineOrderFlowScript);
 
 const sellerPaymentGuardrailScript=document.createElement('script');sellerPaymentGuardrailScript.src='seller-payment-guardrails.js';document.head.append(sellerPaymentGuardrailScript);
+
+const sellerLiveOrderTabsScript=document.createElement('script');sellerLiveOrderTabsScript.src='seller-live-order-tabs.js';document.head.append(sellerLiveOrderTabsScript);

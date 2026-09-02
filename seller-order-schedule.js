@@ -31,14 +31,7 @@
     panel.append(block);
     block.querySelector('.save-order-schedule').addEventListener('click',()=>save(block));
   }
-  function renderVisibility(){
-    const camera=document.querySelector('.camera,.video');
-    if(!camera)return;
-    let badge=camera.querySelector('.seller-order-window-badge');
-    if(!badge){badge=document.createElement('div');badge.className='seller-order-window-badge';camera.append(badge)}
-    const data=settings();
-    badge.innerHTML='<b>Online orders</b><span>'+toLabel(data.acceptStart)+' - '+toLabel(data.closeTime)+'</span><small>'+data.ordersPerHour+' orders/hour</small>';
-  }
+  function renderVisibility(){document.querySelectorAll('.seller-order-window-badge').forEach(node=>node.remove())}
   setInterval(()=>{enhanceSettings();renderVisibility()},600);
   enhanceSettings();renderVisibility();
 })();
