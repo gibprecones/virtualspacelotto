@@ -9,7 +9,7 @@
     currentCart().forEach(item=>{const existing=grouped.get(item.id)||Object.assign({},item,{quantity:0});existing.quantity+=1;grouped.set(item.id,existing)});
     return [...grouped.values()];
   }
-  function closeShopDrawer(){document.querySelectorAll('.commerce-drawer.open,.customer-drawer').forEach(drawer=>drawer.remove?.()||drawer.classList.remove('open'))}
+  function closeShopDrawer(){document.querySelectorAll('.commerce-drawer.open').forEach(drawer=>drawer.classList.remove('open'));document.querySelectorAll('.customer-drawer').forEach(drawer=>drawer.remove())}
   function rebuildCheckout(){
     const modal=document.querySelector('.checkout-modal');
     modal?.remove();

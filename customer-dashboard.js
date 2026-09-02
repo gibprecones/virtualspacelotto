@@ -350,3 +350,5 @@ setInterval(renderSellerBuyerPreview,700);
 
 
 
+
+const sellerOrderScheduleScript=document.createElement('script');sellerOrderScheduleScript.src='seller-order-schedule.js';document.head.append(sellerOrderScheduleScript);const sellerOnlineOrderFlowScript=document.createElement('script');sellerOnlineOrderFlowScript.src='seller-online-order-flow.js';document.head.append(sellerOnlineOrderFlowScript);

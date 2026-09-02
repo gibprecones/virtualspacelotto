@@ -1,0 +1,22 @@
+.order-schedule-settings{
+  grid-column:1 / -1;
+  display:grid;
+  gap:12px;
+  margin-top:14px;
+  border:1px solid #dbe6f4;
+  border-radius:16px;
+  background:#f7fbff;
+  padding:16px;
+}
+.order-schedule-settings b{color:#10213d;font-size:15px}
+.order-schedule-settings p{margin:4px 0 0;color:#5a6d89;font-size:12px;font-weight:800}
+.schedule-grid{display:grid;grid-template-columns:repeat(4,minmax(140px,1fr));gap:10px}
+.schedule-grid label{display:grid;gap:6px;color:#10213d;font-size:12px;font-weight:900}
+.schedule-grid input{width:100%;border:1px solid #cfdbea;border-radius:10px;padding:10px;font:inherit;background:#fff}
+.save-order-schedule{justify-self:start;border:0;border-radius:10px;background:#0755be;color:#fff;font-weight:900;padding:11px 14px;cursor:pointer}
+.schedule-save-status{color:#168142;font-size:12px;font-weight:900}
+.seller-order-window-badge{position:absolute;left:16px;bottom:16px;z-index:8;display:grid;gap:2px;min-width:180px;border:1px solid rgba(255,255,255,.16);border-radius:14px;background:rgba(255,255,255,.94);box-shadow:0 12px 30px rgba(0,0,0,.18);padding:10px 12px;color:#10213d}
+.seller-order-window-badge b{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#0755be}
+.seller-order-window-badge span{font-size:14px;font-weight:900}
+.seller-order-window-badge small{color:#5a6d89;font-size:11px;font-weight:800}
+@media(max-width:900px){.schedule-grid{grid-template-columns:1fr 1fr}.seller-order-window-badge{position:static;margin:10px 0}}
