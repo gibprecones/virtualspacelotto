@@ -77,6 +77,7 @@
     orders.querySelector('h2')?.after(filters);
   }
   function buildAccount(){
+    if(!currentViewer()){document.querySelector('.account-management')?.remove();return}
     const orders=document.querySelector('.customer-orders');if(!orders||document.querySelector('.account-management'))return;
     const shell=document.createElement('section');shell.className='account-management';
     shell.innerHTML='<aside class="account-sidebar"><h2>Account Management</h2><nav class="account-nav"><button data-view="profile">👤 My Profile</button><button data-view="addresses">⌖ Saved Addresses</button><button data-view="payments">▣ Payment Methods</button><button data-view="orders" class="active">▤ My Orders</button><button data-view="favorites">♡ Favorites</button><button data-view="help">? Help Center</button><button class="logout-viewer">↪ Log out</button></nav></aside><div class="account-content"></div>';
@@ -112,6 +113,8 @@
   setInterval(armLogoutButtons,150);
   armLogoutButtons();
 })();
+
+
 
 
 

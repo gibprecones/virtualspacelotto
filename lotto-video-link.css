@@ -1,1 +1,22 @@
 .number-picker{display:none!important}.video-lotto-link{position:absolute;z-index:10;left:16px;right:auto;bottom:18px;display:inline-flex;align-items:center;gap:7px;padding:9px 12px;border-radius:8px;background:#0755be;color:#fff;text-decoration:none;font-family:var(--vsl-font,Inter,Arial,sans-serif);font-size:13px;font-weight:900;box-shadow:0 8px 24px #001b4c66}.video-lotto-link:hover{background:#06469d}.video-lotto-link:focus-visible{outline:3px solid #f6c945;outline-offset:2px}@media(max-width:600px){.video-lotto-link{left:12px;bottom:12px;font-size:12px;padding:8px 10px}}
+
+/* Seller live bottom buttons alignment */
+.camera .video-lotto-link,
+.camera .live-cart-button.seller-shop-preview-button{
+  width:146px!important;
+  min-width:146px!important;
+  height:54px!important;
+  min-height:54px!important;
+  box-sizing:border-box!important;
+  border-radius:10px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:7px!important;
+  padding:0 12px!important;
+  line-height:1!important;
+}
+.camera .live-cart-button.seller-shop-preview-button{
+  display:grid!important;
+  grid-template-columns:auto 1fr auto!important;
+}
