@@ -83,7 +83,7 @@
     shell.innerHTML='<aside class="account-sidebar"><h2>Account Management</h2><nav class="account-nav"><button data-view="profile">👤 My Profile</button><button data-view="addresses">⌖ Saved Addresses</button><button data-view="payments">▣ Payment Methods</button><button data-view="orders" class="active">▤ My Orders</button><button data-view="favorites">♡ Favorites</button><button data-view="help">? Help Center</button><button class="logout-viewer">↪ Log out</button></nav></aside><div class="account-content"></div>';
     orders.before(shell);shell.querySelector('.account-content').append(orders);
     shell.querySelectorAll('[data-view]').forEach(button=>button.onclick=()=>{shell.querySelectorAll('[data-view]').forEach(item=>item.classList.remove('active'));button.classList.add('active');panel(button.dataset.view)});
-    shell.querySelector('.logout-viewer').onclick=event=>{event.preventDefault();localStorage.removeItem('vslViewer');localStorage.removeItem('vslFollowing');try{viewer=null}catch{}document.querySelectorAll('.customer-drawer,.account-management').forEach(node=>node.remove());location.reload()};
+    shell.querySelector('.logout-viewer').onclick=event=>{event.preventDefault();localStorage.removeItem('vslViewer');localStorage.removeItem('vslFollowing');try{viewer=null}catch{}document.querySelectorAll('.customer-drawer,.account-management').forEach(node=>node.remove());window.dispatchEvent(new Event('vslBuyerLoggedOut'))};
     addFilters();
   }
   setInterval(()=>{prepareSignup();buildAccount()},700);
@@ -96,7 +96,7 @@
     localStorage.removeItem('vslFollowing');
     try{viewer=null}catch{}
     document.querySelectorAll('.customer-drawer,.account-management').forEach(node=>node.remove());
-    location.reload();
+    window.dispatchEvent(new Event('vslBuyerLoggedOut'));
   }
   function armLogoutButtons(){
     document.querySelectorAll('.logout-viewer').forEach(button=>{
@@ -118,3 +118,20 @@
 
 
 
+
+
+(()=>{
+  function renderLoggedOutBuyerState(){
+    const gate=document.getElementById('chatGate'),form=document.getElementById('chatForm');
+    if(form)form.hidden=true;
+    if(gate){
+      const hasAccounts=JSON.parse(localStorage.getItem('vslViewerAccounts')||'[]').length>0;
+      gate.hidden=false;
+      gate.removeAttribute('data-join-flow');
+      gate.innerHTML='<b>'+(hasAccounts?'Login to join the live chat':'Sign up to join the live chat')+'</b><p>'+(hasAccounts?'Use your existing buyer Gmail account to chat and order.':'Create a buyer account first, then you can message the seller.')+'</p><div class="join-chat-actions"><button type="button" class="viewer-login-option">Login</button><button type="button" class="viewer-signup-option">Sign up</button></div>';
+    }
+    const followers=document.getElementById('followers');if(followers)followers.textContent='0 followers';
+    const follow=document.getElementById('followButton');if(follow)follow.textContent='+ Follow';
+  }
+  window.addEventListener('vslBuyerLoggedOut',renderLoggedOutBuyerState);
+})();
