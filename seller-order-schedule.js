@@ -12,7 +12,7 @@
     return slots;
   }
   function allSchedules(){return read('vslAppointmentSchedules',{})}
-  function dateSlots(date){const all=allSchedules();return all[date]||legacySlots()}
+  function dateSlots(date){const all=allSchedules();return all[date]||[]}
   function saveDateSlots(date,slots){const all=allSchedules();all[date]=slots;write('vslAppointmentSchedules',all);const first=slots[0],last=slots[slots.length-1];if(first&&last)write('vslOrderSchedule',{acceptStart:first.start,closeTime:last.end,ordersPerHour:Number(first.capacity)||10,updatedAt:Date.now(),appointmentMode:true});}
   function renderSlots(block,date){
     const list=block.querySelector('.appointment-slot-list'),slots=dateSlots(date);
@@ -43,3 +43,4 @@
   setInterval(()=>{enhanceSettings();renderVisibility()},600);
   enhanceSettings();renderVisibility();
 })();
+

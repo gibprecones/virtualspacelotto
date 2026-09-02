@@ -132,7 +132,7 @@ function summarizeOrders(){
   const inventoryRows=products.map(product=>({id:product.id,name:product.name,qty:Number(inventory[product.id]??12)}));
   const lowCount=inventoryRows.filter(item=>item.qty>0&&item.qty<=5).length;
   const outCount=inventoryRows.filter(item=>item.qty<=0).length;
-  const fastCount=Object.values(soldMap).filter(item=>item.qty>=3).length;
+  const fastCount=Object.values(soldMap).filter(item=>item.qty>0).length;
   const activeOrders=orders.filter(order=>!['Completed','Cancelled','Refunded'].includes(order.status)).slice().reverse();
   const alertRows=[];
   if(activeOrders[0])alertRows.push({tone:'info',title:activeOrders[0].transaction+' is ready for action',detail:activeOrders[0].status});
@@ -358,3 +358,4 @@ const sellerPaymentGuardrailScript=document.createElement('script');sellerPaymen
 const sellerLiveOrderTabsScript=document.createElement('script');sellerLiveOrderTabsScript.src='seller-live-order-tabs.js';document.head.append(sellerLiveOrderTabsScript);
 
 const sellerDashboardOrganizationScript=document.createElement('script');sellerDashboardOrganizationScript.src='seller-dashboard-organization-fix.js';document.head.append(sellerDashboardOrganizationScript);
+
