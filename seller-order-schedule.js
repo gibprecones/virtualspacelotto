@@ -21,7 +21,8 @@
     list.querySelectorAll('.remove-slot').forEach(button=>button.addEventListener('click',()=>{const row=button.closest('.appointment-slot-row'),next=dateSlots(date);next.splice(Number(row.dataset.index),1);saveDateSlots(date,next);renderSlots(block,date)}));
   }
   function enhanceSettings(){
-    const panel=document.querySelector('.commerce-settings');
+    const panel=document.querySelector('.seller-orders');
+    document.querySelectorAll('.commerce-settings .order-schedule-settings').forEach(node=>node.remove());
     if(!panel||panel.querySelector('.order-schedule-settings'))return;
     const selected=today();
     const block=document.createElement('div');
@@ -43,4 +44,5 @@
   setInterval(()=>{enhanceSettings();renderVisibility()},600);
   enhanceSettings();renderVisibility();
 })();
+
 
