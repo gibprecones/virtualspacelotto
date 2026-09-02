@@ -203,3 +203,67 @@
   setInterval(enforceFeaturedShopButton,120);
   enforceFeaturedShopButton();
 })();
+
+
+
+(()=>{
+  const read=(key,fallback)=>{try{return JSON.parse(localStorage.getItem(key)||JSON.stringify(fallback))}catch{return fallback}};
+  const write=(key,value)=>localStorage.setItem(key,JSON.stringify(value));
+  const money=value=>'₱'+Number(value||0).toFixed(2);
+  function currentCart(){try{return Array.isArray(cart)?cart:read('vslStoreCart',[])}catch{return read('vslStoreCart',[])}}
+  function findProductByLine(line){
+    const name=line.querySelector('span')?.textContent?.trim();
+    if(!name)return null;
+    try{return products.find(product=>product.name===name)||null}catch{return null}
+  }
+  function refreshDrawerTotals(){
+    const items=currentCart();
+    const grouped=new Map();
+    items.forEach(item=>{const existing=grouped.get(item.id)||Object.assign({},item,{quantity:0});existing.quantity+=1;grouped.set(item.id,existing)});
+    const subtotal=[...grouped.values()].reduce((sum,item)=>sum+Number(item.price||0)*Number(item.quantity||0),0);
+    const title=document.querySelector('.commerce-drawer .drawer-cart-box h3');
+    const subtotalValue=document.querySelector('.commerce-drawer .drawer-subtotal b');
+    const checkout=document.querySelector('#storeCheckout');
+    if(title)title.textContent='Cart ('+items.length+')';
+    if(subtotalValue)subtotalValue.textContent=money(subtotal);
+    if(checkout)checkout.disabled=!items.length;
+    document.querySelectorAll('.viewer-cart-count,.cart-button span').forEach(node=>{node.textContent=items.length});
+  }
+  function removeProduct(productId){
+    const updated=currentCart().filter(item=>String(item.id)!==String(productId));
+    try{cart=updated}catch{}
+    write('vslStoreCart',updated);
+    document.querySelectorAll('.drawer-cart-line').forEach(line=>{
+      const product=findProductByLine(line);
+      if(product&&String(product.id)===String(productId))line.remove();
+    });
+    if(!updated.length){
+      const lines=document.querySelector('.commerce-drawer .drawer-cart-lines');
+      if(lines)lines.innerHTML='<p class="empty-cart-note">No products in cart yet.</p>';
+    }
+    refreshDrawerTotals();
+  }
+  function ensureRemoveButtons(){
+    document.querySelectorAll('.drawer-cart-line').forEach(line=>{
+      if(line.querySelector('.drawer-remove'))return;
+      const product=findProductByLine(line);
+      if(!product)return;
+      const button=document.createElement('button');
+      button.type='button';
+      button.className='drawer-remove';
+      button.dataset.productId=product.id;
+      button.textContent='Remove';
+      button.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();removeProduct(product.id)});
+      line.append(button);
+    });
+  }
+  document.addEventListener('click',event=>{
+    const button=event.target.closest('.drawer-remove');
+    if(!button)return;
+    event.preventDefault();
+    event.stopPropagation();
+    removeProduct(button.dataset.productId);
+  },true);
+  setInterval(ensureRemoveButtons,250);
+  ensureRemoveButtons();
+})();

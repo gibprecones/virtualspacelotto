@@ -83,3 +83,29 @@ body:has(.commerce-drawer) #storePanel,body:has(.commerce-drawer) #storeCart{dis
 .camera .live-cart-button.seller-shop-preview-button small{align-self:center!important;justify-self:end!important;margin:0!important}
 
 
+
+.drawer-cart-line{
+  grid-template-columns:minmax(0,1fr) auto auto auto;
+  align-items:center;
+  column-gap:10px;
+}
+.drawer-remove{
+  border:1px solid rgba(239,68,68,.24);
+  border-radius:999px;
+  background:#fff5f5;
+  color:#dc2626;
+  font-family:inherit;
+  font-size:11px;
+  font-weight:900;
+  padding:7px 10px;
+  cursor:pointer;
+}
+.drawer-remove:hover{background:#fee2e2}
+.empty-cart-note{
+  margin:0;
+  border:1px dashed rgba(12,42,84,.2);
+  border-radius:14px;
+  padding:14px;
+  color:#49607d;
+  font-weight:800;
+}
