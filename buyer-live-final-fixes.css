@@ -8,3 +8,6 @@ html,body,body *,button,input,select,textarea{font-family:var(--vsl-font,"Henry 
 
 .gmail-avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover}.gmail-connect-button[data-real-google-auth='1']{border-color:#cfdbea!important}
 
+
+.signup-map-preview{width:100%;height:190px;border:1px solid #c9d8e8;border-radius:10px;background:#eef3fa;margin-top:8px}
+
