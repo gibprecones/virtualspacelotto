@@ -356,3 +356,5 @@ const sellerOrderScheduleScript=document.createElement('script');sellerOrderSche
 const sellerPaymentGuardrailScript=document.createElement('script');sellerPaymentGuardrailScript.src='seller-payment-guardrails.js';document.head.append(sellerPaymentGuardrailScript);
 
 const sellerLiveOrderTabsScript=document.createElement('script');sellerLiveOrderTabsScript.src='seller-live-order-tabs.js';document.head.append(sellerLiveOrderTabsScript);
+
+const sellerDashboardOrganizationScript=document.createElement('script');sellerDashboardOrganizationScript.src='seller-dashboard-organization-fix.js';document.head.append(sellerDashboardOrganizationScript);
